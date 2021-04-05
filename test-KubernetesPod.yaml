@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-java-maven-app
+  namespace: jenkins-build
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: jnlp
+    image: jenkins/inbound-agent:4.3-4
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+  - name: maven
+    image: maven:3.3.9-jdk-8-alpine
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: maven
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: busybox
+  nodeName: mini-x86
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
