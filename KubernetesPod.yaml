@@ -4,7 +4,7 @@ metadata:
 spec:
   containers:
   - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
+    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_AGENT_NAME)']
     env:
     - name: CONTAINER_ENV_VAR
       value: jnlp
