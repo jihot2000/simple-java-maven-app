@@ -1,14 +1,22 @@
 pipeline {
   agent {
-    docker {
-      image 'maven:3-alpine'
-      args '-v /root/.m2:/root/.m2'
+    kubernetes {
+      yamlFile 'KubernetesPod.yaml'
     }
   }
   stages {
-    stage('Build') {
+    stage('Run maven') {
       steps {
-        sh 'mvn -B -DskipTests clean package'
+        sh 'set'
+        sh "echo OUTSIDE_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}"
+        container('maven') {
+          sh 'echo MAVEN_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
+          sh 'mvn -version'
+        }
+        container('busybox') {
+          sh 'echo BUSYBOX_CONTAINER_ENV_VAR = ${CONTAINER_ENV_VAR}'
+          sh '/bin/busybox'
+        }
       }
     }
   }
