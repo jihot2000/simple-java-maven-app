@@ -4,7 +4,6 @@ metadata:
 spec:
   containers:
   - name: jnlp
-    args: ['\$(JENKINS_SECRET)', '\$(JENKINS_AGENT_NAME)']
     env:
     - name: CONTAINER_ENV_VAR
       value: jnlp
@@ -28,4 +27,3 @@ spec:
   tolerations:
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
-  restartPolicy: Never
