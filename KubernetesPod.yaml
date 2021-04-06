@@ -24,7 +24,7 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: busybox
-  nodeName: k8s-master-qemu
+  nodeName: mini-x86
   tolerations:
     - key: "node-role.kubernetes.io/master"
       operator: "Exists"
