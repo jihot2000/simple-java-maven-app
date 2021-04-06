@@ -17,7 +17,7 @@ spec:
     - name: CONTAINER_ENV_VAR
       value: maven
   - name: busybox
-    image: busybox
+    image: busybox:1.32.1
     command:
     - cat
     tty: true
